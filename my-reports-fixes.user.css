@@ -1,0 +1,15 @@
+/* ==UserStyle==
+@name         Nexus Kit: My Reports Fixes
+@namespace    https://github.com/wxMichael/nexus-kit-userscripts
+@version      13.0.0
+@description  Layout fixes for the My Reports page.
+@author       wxMichael
+@license      MIT
+@updateURL    https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/my-reports-fixes.user.css
+==/UserStyle== */
+
+@-moz-document regexp("^https://[^/]*\.nexusmods\.com/my-reports.*") {
+	div.break-words {
+		white-space-collapse: preserve;
+	}
+}
