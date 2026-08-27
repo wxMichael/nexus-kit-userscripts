@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🖼 Mod Edit: Image viewer
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      14.0
 // @description  Click an image thumbnail on a mod's Media edit tab to open a full-screen viewer with keyboard/scroll navigation and per-image menu actions built in.
 // @author       wxMichael
 // @license      MIT
@@ -368,7 +368,8 @@ async function nmxOpenContentPreviewModal(url) {
 		treeContainer.textContent = `Failed to load file contents: ${error.message}`;
 		return;
 	}
-	const tree = Array.isArray(json) ? buildTreeFromManifest(json) : buildTreeFromLegacy(json.children ?? []);
+	const manifestEntries = Array.isArray(json) ? json : Array.isArray(json.files) ? json.files : undefined;
+	const tree = manifestEntries ? buildTreeFromManifest(manifestEntries) : buildTreeFromLegacy(json.children ?? []);
 	sortTree(tree);
 	renderModalContents(shadowRoot, tree, url);
 }
