@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 📄 Files tab tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      14.0
 // @description  Improved content preview with search, hash comparison, and risk flagging. Show file "names". Add missing file archive button. Add File ID with copy button.
 // @author       wxMichael
 // @license      MIT
@@ -368,7 +368,8 @@ async function nmxOpenContentPreviewModal(url) {
 		treeContainer.textContent = `Failed to load file contents: ${error.message}`;
 		return;
 	}
-	const tree = Array.isArray(json) ? buildTreeFromManifest(json) : buildTreeFromLegacy(json.children ?? []);
+	const manifestEntries = Array.isArray(json) ? json : Array.isArray(json.files) ? json.files : undefined;
+	const tree = manifestEntries ? buildTreeFromManifest(manifestEntries) : buildTreeFromLegacy(json.children ?? []);
 	sortTree(tree);
 	renderModalContents(shadowRoot, tree, url);
 }
