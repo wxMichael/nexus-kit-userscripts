@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 📄 Mod Edit: Files tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      14.0
 // @description  On a mod's Files edit tab, show a scan-status icon and file size next to each file's name, plus a button to preview file contents.
 // @author       wxMichael
 // @license      MIT
@@ -371,7 +371,8 @@ async function nmxOpenContentPreviewModal(url) {
 		treeContainer.textContent = `Failed to load file contents: ${error.message}`;
 		return;
 	}
-	const tree = Array.isArray(json) ? buildTreeFromManifest(json) : buildTreeFromLegacy(json.children ?? []);
+	const manifestEntries = Array.isArray(json) ? json : Array.isArray(json.files) ? json.files : undefined;
+	const tree = manifestEntries ? buildTreeFromManifest(manifestEntries) : buildTreeFromLegacy(json.children ?? []);
 	sortTree(tree);
 	renderModalContents(shadowRoot, tree, url);
 }
