@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🏷 Improved mod tagging layout
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @author       wxMichael
 // @license      MIT
 // @updateURL    https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/new-tag-styles.user.js
@@ -44,7 +44,7 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 	window.browser = {
 		runtime: {

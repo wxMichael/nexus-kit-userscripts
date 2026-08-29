@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 💬 Comment tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  Copy Link/Text & Translate buttons. Highlight linked comment. Shift+Hover avatars to zoom.
 // @author       wxMichael
 // @license      MIT
@@ -23,6 +23,16 @@
 		"src/features/comment-tweaks/comment-tweaks.css":
 			"I3pvb20tb3ZlcmxheSB7Cglwb3NpdGlvbjogZml4ZWQ7Cgl6LWluZGV4OiAxMDAwOwoJcG9pbnRlci1ldmVudHM6IG5vbmU7CglvcGFjaXR5OiAwOwoJdHJhbnNpdGlvbjoKCQl0cmFuc2Zvcm0gMC41cyBjdWJpYy1iZXppZXIoMC4xNzUsIDAuODg1LCAwLjMyLCAxLjI3NSksCgkJb3BhY2l0eSAwLjNzIGVhc2U7Cgl0cmFuc2Zvcm0tb3JpZ2luOiB0b3AgbGVmdDsKfQoKI3pvb20tb3ZlcmxheS56b29taW5nIHsKCW9wYWNpdHk6IDE7Cn0KCi5jb21tZW50cyB1bC5hY3Rpb25zIHsKCSYgPiBsaSB7CgkJJjpoYXMoLmJ0biA+IHN2Zy5pY29uLXJlcG9ydCkgewoJCQlvcmRlcjogLTE7CgkJfQoKCQkmLm5teC1jb21tZW50LWFjdGlvbiB7CgkJCW9yZGVyOiAtMjsKCQkJdGV4dC1hbGlnbjogY2VudGVyOwoKCQkJYS5kaXNhYmxlZCB7CgkJCQlvcGFjaXR5OiAwLjQ7CgkJCQljdXJzb3I6IGRlZmF1bHQ7CgkJCQlwb2ludGVyLWV2ZW50czogbm9uZTsKCQkJfQoKCQkJYS5wcm9ncmVzcyB7CgkJCQljdXJzb3I6IHByb2dyZXNzOwoJCQl9CgkJfQoJfQoKCSYgLmJ0bjpoYXMoPiBzdmcuaWNvbi1yZXBvcnQpIHsKCQlib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1kYW5nZXItd2Vhayk7CgkJYmFja2dyb3VuZC1jb2xvcjogI2QwMDI7CgoJCSY6OmJlZm9yZSB7CgkJCWJhY2tncm91bmQtY29sb3I6ICNkMDA0OwoJCX0KCX0KfQo=",
 	};
+	const MIME_BY_EXT = {
+		".css": "text/css;charset=utf-8",
+		".txt": "text/plain;charset=utf-8",
+		".woff2": "font/woff2",
+		".js": "text/javascript;charset=utf-8",
+	};
+	function mimeFor(relPath) {
+		const ext = relPath.slice(relPath.lastIndexOf("."));
+		return MIME_BY_EXT[ext] ?? "application/octet-stream";
+	}
 	function requireResource(relPath) {
 		const base64 = RESOURCES[relPath];
 		if (base64 === undefined) throw new Error(`[Nexus Kit userscript] Missing embedded resource: ${relPath}`);
@@ -36,7 +46,12 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
+	};
+	window.browser = {
+		runtime: {
+			getURL: (relPath) => `data:${mimeFor(relPath)};base64,${requireResource(relPath)}`,
+		},
 	};
 })();
 
@@ -63,6 +78,8 @@
 	let isShiftPressed = false;
 	let currentAvatar = null;
 	let avatarZoomOverlay;
+	let expectedPage = null;
+	const CORRECT_PAGE_EVENT_NAME = "nmx-comment-page-correction";
 	if (postsURL.test(location.href)) {
 		pageLink = document.querySelector("#fileinfo > .sideitem:nth-of-type(2) > a")?.href;
 		useObserver = false;
@@ -96,11 +113,19 @@
 	function injectJS() {
 		if ("nmxCommentTweaksLoaded" in document.body.dataset) removeJS();
 		else document.body.dataset.nmxCommentTweaksLoaded = "";
+		injectPageScript();
 		if (document.querySelector(wrapperSelector)) processComments();
 		if (useObserver) {
 			const targetNode = document.querySelector(observationTargetSelector);
 			observerStart(targetNode);
 		}
+		document.addEventListener("click", handleModerationActionClick, true);
+	}
+	function injectPageScript() {
+		const script = document.createElement("script");
+		script.src = browser.runtime.getURL("src/features/comment-tweaks/comment-tweaks-inject.js");
+		script.addEventListener("load", () => script.remove());
+		(document.head || document.documentElement).prepend(script);
 	}
 	function removeJS() {
 		if (useObserver) observerStop();
@@ -115,6 +140,8 @@
 			content.dataset.translated = "no";
 			content.replaceChildren(...content.originalNodes);
 		});
+		document.removeEventListener("click", handleModerationActionClick, true);
+		expectedPage = null;
 		document.removeEventListener("keydown", handleKeyDown);
 		document.removeEventListener("keyup", handleKeyUp);
 		avatarImageElements = document.querySelectorAll("a.comment-user > img");
@@ -171,9 +198,32 @@
 			}
 		}
 	}
+	function handleModerationActionClick(event) {
+		const trigger = event.target.closest(".change-comment-status");
+		if (!trigger) return;
+		const commentContainer = document.querySelector(wrapperSelector);
+		if (!commentContainer?.contains(trigger)) return;
+		const activePageLink = commentContainer.querySelector(".pagination .page-selected");
+		expectedPage = activePageLink
+			? activePageLink.textContent.trim()
+			: (commentContainer.querySelector("#current-page-number")?.value ?? "1");
+	}
+	function correctModerationPageReset(commentContainer) {
+		if (expectedPage === null) return;
+		const page = expectedPage;
+		expectedPage = null;
+		const actualPageInput = commentContainer.querySelector("#current-page-number");
+		if (!actualPageInput || actualPageInput.value === page) return;
+		document.dispatchEvent(
+			new CustomEvent(CORRECT_PAGE_EVENT_NAME, {
+				detail: page,
+			}),
+		);
+	}
 	function processComments() {
 		const commentContainer = document.querySelector(wrapperSelector);
 		if (commentContainer === null) return;
+		correctModerationPageReset(commentContainer);
 		const comments = commentContainer.querySelectorAll("li.comment");
 		if (comments.length === 0) return;
 		comments.forEach((currentValue, _currentIndex, _listObj) => {

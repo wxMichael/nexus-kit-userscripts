@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🖼 Mod Edit: Image viewer
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      14.0
+// @version      15.0
 // @description  Click an image thumbnail on a mod's Media edit tab to open a full-screen viewer with keyboard/scroll navigation and per-image menu actions built in.
 // @author       wxMichael
 // @license      MIT
@@ -43,7 +43,7 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 	window.browser = {
 		runtime: {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🔔 Unread counts in page title
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  |
 // @author       wxMichael
 // @license      MIT
@@ -14,7 +14,7 @@
 
 (() => {
 	window.nmxRegisterToggle = (_settingName, { onEnable: onEnable } = {}) => {
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 })();
 

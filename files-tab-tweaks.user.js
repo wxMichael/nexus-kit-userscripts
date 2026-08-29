@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 📄 Files tab tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      14.0
+// @version      15.0
 // @description  Improved content preview with search, hash comparison, and risk flagging. Show file "names". Add missing file archive button. Add File ID with copy button.
 // @author       wxMichael
 // @license      MIT
@@ -43,7 +43,7 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 	window.browser = {
 		runtime: {

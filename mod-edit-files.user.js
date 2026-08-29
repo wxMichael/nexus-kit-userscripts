@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 📄 Mod Edit: Files tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      14.0
+// @version      15.0
 // @description  On a mod's Files edit tab, show a scan-status icon and file size next to each file's name, plus a button to preview file contents.
 // @author       wxMichael
 // @license      MIT
@@ -43,7 +43,7 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 	window.browser = {
 		runtime: {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: ✨ Mod Author badge bling
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  Recolors the Mod Author badge by unique downloads - bronze at 30K, silver at 500K, gold with sparkles at 1M, escalating to particles past 2M and full chaos at 20M.
 // @author       wxMichael
 // @license      MIT
@@ -44,6 +44,7 @@
 			injectJS();
 		},
 		onDisable: removeJS,
+		defaultEnabled: false,
 	});
 	const particleFieldClass = "nmx-bling-particle-field";
 	const particleClass = "nmx-bling-particle";

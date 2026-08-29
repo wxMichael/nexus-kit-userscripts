@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🔎 Advanced mod search
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  Adds match type toggles to mod search filters for Tags, Title, and Description fields.
 // @author       wxMichael
 // @license      MIT
@@ -30,7 +30,7 @@
 		if (cssFiles) {
 			for (const relPath of cssFiles) GM_addStyle(textOf(relPath));
 		}
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 })();
 

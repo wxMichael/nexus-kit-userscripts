@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: Disable Dark Reader Conflict
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  Prevents the Dark Reader extension from double-applying its own dark mode on top of the Nexus Mods site's native dark theme.
 // @author       wxMichael
 // @license      MIT
@@ -14,7 +14,7 @@
 
 (() => {
 	window.nmxRegisterToggle = (_settingName, { onEnable: onEnable } = {}) => {
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 })();
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: ☑ Auto-check image/video terms box
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      13.0
+// @version      15.0
 // @description  When editing an image/video page, automatically check 'I agree to the terms and conditions'
 // @author       wxMichael
 // @license      MIT
@@ -16,7 +16,7 @@
 
 (() => {
 	window.nmxRegisterToggle = (_settingName, { onEnable: onEnable } = {}) => {
-		onEnable?.(true);
+		queueMicrotask(() => onEnable?.(true));
 	};
 })();
 
