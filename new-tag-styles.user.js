@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Nexus Kit: 🏷 Improved mod tagging layout
+// @name         Nexus Kit: 🏷️ Improved mod tagging layout
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      15.0
+// @version      16.0
 // @author       wxMichael
 // @license      MIT
 // @updateURL    https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/new-tag-styles.user.js

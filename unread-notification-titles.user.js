@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🔔 Unread counts in page title
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      15.0
+// @version      16.0
 // @description  |
 // @author       wxMichael
 // @license      MIT
@@ -19,7 +19,7 @@
 })();
 
 (() => {
-	const PREFIX_PATTERN = /^(?:🔔\d+ )?(?:✉\d+ )?· /;
+	const PREFIX_PATTERN = /^(?:🔔\d* )?(?:✉️\d+ )?· /;
 	let bodyObserver;
 	let titleObserver;
 	let rescanTimer;
@@ -43,6 +43,7 @@
 		stopBodyObserver();
 		stopTitleObserver();
 		clearTimeout(rescanTimer);
+		rescanTimer = undefined;
 		restoreTitle();
 	}
 	function restoreTitle() {
@@ -53,8 +54,11 @@
 		bodyObserver = new MutationObserver((mutationList) => {
 			const portalRoot = document.getElementById("headlessui-portal-root");
 			if (portalRoot && mutationList.every((mutation) => portalRoot.contains(mutation.target))) return;
-			clearTimeout(rescanTimer);
-			rescanTimer = setTimeout(updateTitle, 200);
+			if (rescanTimer) return;
+			rescanTimer = setTimeout(() => {
+				rescanTimer = undefined;
+				updateTitle();
+			}, 200);
 		});
 		bodyObserver.observe(document.body, {
 			childList: true,
@@ -63,6 +67,8 @@
 			attributes: true,
 			attributeFilter: [
 				"data-currentcount",
+				"data-nmx-count",
+				"style",
 			],
 		});
 	}
@@ -101,28 +107,41 @@
 				inbox: parseCount(inbox?.dataset.currentcount),
 			};
 		}
+		const injectedMenus = document.querySelector(".nmx-header-menus");
+		if (injectedMenus) {
+			return {
+				notifications: parseCount(injectedMenus.querySelector('[data-nmx-header-menu="notifications"]')?.dataset.nmxCount),
+				inbox: parseCount(injectedMenus.querySelector('[data-nmx-header-menu="inbox"]')?.dataset.nmxCount),
+			};
+		}
 		const desktopHeader = document.querySelector('[data-e2eid="desktop-header"]');
 		if (desktopHeader) {
 			const notifTrigger = desktopHeader.querySelector('[aria-label="Show notifications"]');
 			const inboxTrigger = desktopHeader.querySelector('[aria-label="View messages"]');
-			const notifCount = notifTrigger?.parentElement?.querySelector('[data-e2eid="unread-message-count"]');
+			const notifIndicator = notifTrigger?.parentElement?.querySelector(
+				'[data-e2eid="unread-notifications-dot"], [data-e2eid="unread-message-count"]',
+			);
 			const inboxCount = inboxTrigger?.parentElement?.querySelector('[data-e2eid="unread-message-count"]');
 			return {
-				notifications: parseCount(notifCount?.textContent),
+				notifications: notifIndicator?.dataset.e2eid === "unread-notifications-dot" || parseCount(notifIndicator?.textContent),
 				inbox: parseCount(inboxCount?.textContent),
 			};
 		}
 		const notifications = document.querySelector("#head .rj-notifications .bubble");
 		const inbox = document.querySelector("#head .rj-messages .bubble");
 		return {
-			notifications: bubbleCount(notifications),
+			notifications: legacyNotificationsCount(notifications),
 			inbox: bubbleCount(inbox),
 		};
 	}
+	function legacyNotificationsCount(el) {
+		if (el?.classList.contains("bubble--dot")) return getComputedStyle(el).display !== "none";
+		return bubbleCount(el);
+	}
 	function buildPrefix({ notifications: notifications, inbox: inbox }) {
 		const parts = [];
-		if (notifications > 0) parts.push(`🔔${notifications}`);
-		if (inbox > 0) parts.push(`✉${inbox}`);
+		if (notifications === true || notifications > 0) parts.push("🔔");
+		if (inbox > 0) parts.push(`✉️${inbox}`);
 		return parts.length ? `${parts.join(" ")} · ` : "";
 	}
 	function updateTitle() {

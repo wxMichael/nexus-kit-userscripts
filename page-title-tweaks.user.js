@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 🔖 Tweak page titles for nicer tabs and bookmarks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      15.0
+// @version      16.0
 // @description  e.g. 'SkyUI' instead of 'SkyUI at Skyrim Special Edition Nexus - Mods and Community'
 // @author       wxMichael
 // @license      MIT
@@ -13,7 +13,9 @@
 // @match         *://*.nexusmods.com/mods/*
 // @match         *://*.nexusmods.com/*/supporterimages/*
 // @match         *://*.nexusmods.com/*/videos/*
+// @match         *://*.nexusmods.com/*/articles/*
 // @match         *://*.nexusmods.com/news/*
+// @match         *://*.nexusmods.com/*/news/*
 // @match         *://*.nexusmods.com/posts/*
 // @match         *://*.nexusmods.com/mods*
 // @grant         GM_addStyle

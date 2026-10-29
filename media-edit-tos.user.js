@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         Nexus Kit: ☑ Auto-check image/video terms box
+// @name         Nexus Kit: ☑️ Auto-check image/video terms box
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      15.0
+// @version      16.0
 // @description  When editing an image/video page, automatically check 'I agree to the terms and conditions'
 // @author       wxMichael
 // @license      MIT

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Nexus Kit: 📄 Files tab tweaks
 // @namespace    https://github.com/wxMichael/nexus-kit-userscripts
-// @version      15.0
+// @version      16.0
 // @description  Improved content preview with search, hash comparison, and risk flagging. Show file "names". Add missing file archive button. Add File ID with copy button.
 // @author       wxMichael
 // @license      MIT
@@ -18,7 +18,7 @@
 		"src/features/files-tab-tweaks/files-tab-tweaks.css":
 			"LmZpbGUtdHdlYWtzIHsKCWZvbnQtc2l6ZTogMTBweDsKCWZvbnQtd2VpZ2h0OiA0MDA7Cgljb2xvcjogIzk5OTsKCXRleHQtd3JhcC1tb2RlOiB3cmFwOwp9Cgoubm14LWZpbGUtaWQtdGV4dCB7Cglmb250LXNpemU6IDEycHg7Cglmb250LXdlaWdodDogNDAwOwoJY29sb3I6ICNiYmI7Cn0KCi5ubXgtY29weS1maWxlLWlkLWJ0biB7CglkaXNwbGF5OiBpbmxpbmUtZmxleDsKCWFsaWduLWl0ZW1zOiBjZW50ZXI7Cgl2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlOwoJbWFyZ2luLWxlZnQ6IDAuMjVyZW07CglwYWRkaW5nOiAwOwoJYm9yZGVyOiBub25lOwoJYmFja2dyb3VuZDogbm9uZTsKCWNvbG9yOiAjYmJiOwoJb3BhY2l0eTogMC42OwoJY3Vyc29yOiBwb2ludGVyOwoJdHJhbnNpdGlvbjogb3BhY2l0eSAwLjJzIGVhc2U7CgoJJiBzdmcgewoJCXdpZHRoOiAxNHB4OwoJCWhlaWdodDogMTRweDsKCX0KCgkmOmhvdmVyIHsKCQlvcGFjaXR5OiAxOwoJfQoKCSYuZGlzYWJsZWQgewoJCXBvaW50ZXItZXZlbnRzOiBub25lOwoJfQoKCSYubm14LWNvcHktZmFpbGVkIHsKCQljb2xvcjogI2UzMzsKCX0KfQo=",
 		"src/shared/content-preview-modal.css":
-			"Cjpob3N0IHsKCWFsbDogaW5pdGlhbDsKfQoKKiB7Cglib3gtc2l6aW5nOiBib3JkZXItYm94Owp9Cgoubm14LWZjcC1iYWNrZHJvcCB7Cglwb3NpdGlvbjogZml4ZWQ7Cgl0b3A6IDA7CglsZWZ0OiAwOwoJd2lkdGg6IDEwMCU7CgloZWlnaHQ6IDEwMCU7CglkaXNwbGF5OiBmbGV4OwoJYWxpZ24taXRlbXM6IGNlbnRlcjsKCWp1c3RpZnktY29udGVudDogY2VudGVyOwoJYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjgpOwoJei1pbmRleDogOTk5OTsKfQoKLm5teC1mY3AtbW9kYWwgewoJZGlzcGxheTogZmxleDsKCWZsZXgtZGlyZWN0aW9uOiBjb2x1bW47Cgl3aWR0aDogOTAlOwoJbWF4LXdpZHRoOiA5MDBweDsKCWhlaWdodDogODUlOwoJYmFja2dyb3VuZDogIzFkMWQyMTsKCWNvbG9yOiAjZTRlNGU3OwoJYm9yZGVyOiAxcHggc29saWQgIzcxNzE3YTsKCWJvcmRlci1yYWRpdXM6IDhweDsKCW92ZXJmbG93OiBoaWRkZW47CgoJZm9udC1mYW1pbHk6IHVpLXNhbnMtc2VyaWYsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiwgIkFwcGxlIENvbG9yIEVtb2ppIiwgIlNlZ29lIFVJIEVtb2ppIiwgIlNlZ29lIFVJIFN5bWJvbCIsICJOb3RvIENvbG9yIEVtb2ppIjsKCWZvbnQtc2l6ZTogMTRweDsKCWxpbmUtaGVpZ2h0OiAxLjQ7Cn0KCi5ubXgtZmNwLWhlYWRlciB7Cglwb3NpdGlvbjogcmVsYXRpdmU7CglmbGV4OiAwIDAgYXV0bzsKCXBhZGRpbmc6IDEycHggNTZweCAxMnB4IDE2cHg7Cglib3JkZXItYm90dG9tOiAxcHggc29saWQgIzcxNzE3YTsKCWJhY2tncm91bmQ6ICMyOTI5MmU7CglsaW5lLWhlaWdodDogMS4xOwp9Cgoubm14LWZjcC10aXRsZS1yb3cgewoJZGlzcGxheTogZmxleDsKCWFsaWduLWl0ZW1zOiBjZW50ZXI7CglqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47CglnYXA6IDEycHg7CgltYXJnaW4tYm90dG9tOiA4cHg7Cn0KCi5ubXgtZmNwLXRpdGxlIHsKCW1hcmdpbjogMDsKCWZvbnQtc2l6ZTogMjBweDsKCWZvbnQtd2VpZ2h0OiA2MDA7Cn0KCi5ubXgtZmNwLWhhc2gtYWN0aW9ucyB7CglkaXNwbGF5OiBmbGV4OwoJYWxpZ24taXRlbXM6IGNlbnRlcjsKCWdhcDogNnB4OwoJZmxleDogMCAwIGF1dG87Cn0KCi5ubXgtZmNwLWhhc2gtYnRuIHsKCWJhY2tncm91bmQ6ICMzZTNlNDc7Cgljb2xvcjogI2U0ZTRlNzsKCWJvcmRlcjogMXB4IHNvbGlkICM3MTcxN2E7Cglib3JkZXItcmFkaXVzOiA0cHg7CglwYWRkaW5nOiA0cHggMTBweDsKCWZvbnQtc2l6ZTogMTJweDsKCWZvbnQtd2VpZ2h0OiA2MDA7Cgl0ZXh0LWRlY29yYXRpb246IG5vbmU7CgljdXJzb3I6IHBvaW50ZXI7Cgl3aGl0ZS1zcGFjZTogbm93cmFwOwoKCSY6aG92ZXI6bm90KDpkaXNhYmxlZCkgewoJCWJhY2tncm91bmQ6ICM1MjUyNWI7Cgl9CgoJJjpkaXNhYmxlZCB7CgkJY3Vyc29yOiBkZWZhdWx0OwoJCW9wYWNpdHk6IDAuNjsKCX0KfQoKLm5teC1mY3AtaGFzaC1idG4tLXJlbWVtYmVyZWQgewoJYm9yZGVyLWNvbG9yOiBoc2woMTIwLCA0MCUsIDQ1JSk7Cgljb2xvcjogaHNsKDEyMCwgNjAlLCA3MCUpOwp9Cgoubm14LWZjcC1oYXNoLWJ0bi0tZ290byB7CglwYWRkaW5nOiA0cHggOHB4OwoJY29sb3I6IGhzbCgyMDcsIDcwJSwgNzUlKTsKCWJvcmRlci1jb2xvcjogaHNsKDIwNywgNDAlLCA0NSUpOwoKCSY6aG92ZXIgewoJCWJhY2tncm91bmQ6IGhzbCgyMDcsIDQ1JSwgMjAlKTsKCX0KfQoKLm5teC1mY3AtaGFzaC1idG4tLWZvcmdldCB7CglwYWRkaW5nOiA0cHggOHB4OwoJY29sb3I6IGhzbCg0NSwgNTAlLCA3MCUpOwoJYm9yZGVyLWNvbG9yOiBoc2woNDUsIDM1JSwgNDAlKTsKCgkmOmhvdmVyOm5vdCg6ZGlzYWJsZWQpIHsKCQliYWNrZ3JvdW5kOiBoc2woNDUsIDQ1JSwgMjAlKTsKCX0KfQoKLm5teC1mY3AtY2xvc2UgewoJcG9zaXRpb246IGFic29sdXRlOwoJdG9wOiAwcHg7CglyaWdodDogOHB4OwoJYmFja2dyb3VuZDogbm9uZTsKCWJvcmRlcjogbm9uZTsKCWNvbG9yOiAjZTRlNGU3OwoJZm9udC1zaXplOiAzNHB4OwoJbGluZS1oZWlnaHQ6IDE7CgljdXJzb3I6IHBvaW50ZXI7CgoJJjpob3ZlciB7CgkJY29sb3I6ICNmYWZhZmE7Cgl9Cn0KCi5ubXgtZmNwLW1ldGEgewoJZGlzcGxheTogZmxleDsKCWZsZXgtd3JhcDogd3JhcDsKCWFsaWduLWl0ZW1zOiBjZW50ZXI7CglnYXA6IDhweDsKCW1hcmdpbi1ib3R0b206IDhweDsKfQoKLm5teC1mY3AtcmlzayB7CglwYWRkaW5nOiAycHggOHB4OwoJYm9yZGVyLXJhZGl1czogNHB4OwoJZm9udC13ZWlnaHQ6IDYwMDsKCWZvbnQtc2l6ZTogMTFweDsKCWxldHRlci1zcGFjaW5nOiAwLjA1ZW07Cn0KCi5ubXgtZmNwLXJpc2stLWhpZ2ggewoJYmFja2dyb3VuZC1jb2xvcjogaHNsKDAsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDAsIDkwJSwgNjAlKTsKfQoKLm5teC1mY3Atcmlzay0tbWVkaXVtIHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCg1NSwgMTAwJSwgMTAlKTsKCWNvbG9yOiBoc2woNTUsIDkwJSwgNjAlKTsKfQoKLm5teC1mY3Atcmlzay0tbG93IHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCgyMDcsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDIwNywgOTAlLCA2NSUpOwp9Cgoubm14LWZjcC1yaXNrLS1zYWZlIHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCgxMjAsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDEyMCwgNDAlLCA2NSUpOwp9Cgoubm14LWZjcC1yaXNrLS1kZWZhdWx0IHsKCWJhY2tncm91bmQtY29sb3I6ICMzZTNlNDc7Cgljb2xvcjogI2Q0ZDRkODsKfQoKLm5teC1mY3AtZXh0ZW5zaW9ucyB7CglkaXNwbGF5OiBmbGV4OwoJZmxleC13cmFwOiB3cmFwOwoJZ2FwOiA2cHg7Cn0KCi5ubXgtZmNwLWV4dCB7CglwYWRkaW5nOiAxcHggNnB4OwoJYm9yZGVyLXJhZGl1czogNHB4OwoJZm9udC1zaXplOiAxMXB4OwoJY3Vyc29yOiBwb2ludGVyOwoJYmFja2dyb3VuZDogIzNlM2U0NzsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kOiAjNTI1MjViOwoJfQp9Cgoubm14LWZjcC1leHQtLWhpZ2ggewoJY29sb3I6IGhzbCgwLCAxMDAlLCA3NiUpOwp9Cgoubm14LWZjcC1leHQtLW1lZGl1bSB7Cgljb2xvcjogaHNsKDU1LCA5MCUsIDYwJSk7Cn0KCi5ubXgtZmNwLWV4dC0tbG93IHsKCWNvbG9yOiBoc2woMjA3LCA5MCUsIDY1JSk7Cn0KCi5ubXgtZmNwLWV4dC0tc2FmZSB7Cgljb2xvcjogaHNsKDEyMCwgMjUlLCA2NSUpOwp9Cgoubm14LWZjcC1leHQtLWRlZmF1bHQgewoJY29sb3I6ICNkNGQ0ZDg7Cn0KCi5ubXgtZmNwLWZpbHRlciB7Cgl3aWR0aDogMTAwJTsKCWJhY2tncm91bmQtY29sb3I6ICMxZDFkMjE7Cgljb2xvcjogI2U0ZTRlNzsKCWJvcmRlcjogMXB4IHNvbGlkICNhMWExYWE7Cglib3JkZXItcmFkaXVzOiA0cHg7CglwYWRkaW5nOiA2cHggOHB4OwoJZm9udC1zaXplOiAxNHB4Owp9Cgoubm14LWZjcC10cmVlIHsKCWZsZXg6IDEgMSBhdXRvOwoJb3ZlcmZsb3cteTogYXV0bzsKCXBhZGRpbmc6IDhweCAwOwoJZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsKCWZvbnQtc2l6ZTogMTNweDsKfQoKLm5teC1mY3Atcm93IHsKCWRpc3BsYXk6IGZsZXg7CglhbGlnbi1pdGVtczogY2VudGVyOwoJZ2FwOiA0cHg7CglwYWRkaW5nOiAycHggOHB4OwoJd2hpdGUtc3BhY2U6IG5vd3JhcDsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kLWNvbG9yOiAjMjkyOTJlOwoJfQp9Cgoubm14LWZjcC1kaXIgewoJY3Vyc29yOiBwb2ludGVyOwoJdXNlci1zZWxlY3Q6IG5vbmU7Cn0KCi5ubXgtZmNwLWFycm93IHsKCWRpc3BsYXk6IGlubGluZS1ibG9jazsKCXdpZHRoOiAxZW07CgoJJjo6YmVmb3JlIHsKCQljb250ZW50OiAi4pa9IjsKCX0KfQoKLm5teC1mY3Atcm93Lm5teC1mY3AtY29sbGFwc2VkID4gLm5teC1mY3AtYXJyb3c6OmJlZm9yZSB7Cgljb250ZW50OiAi4pa3IjsKfQoKLm5teC1mY3AtbmFtZSB7CglvdmVyZmxvdzogaGlkZGVuOwoJdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7Cn0KCi5ubXgtZmNwLW5hbWUtLWhpZ2ggewoJY29sb3I6IGhzbCgwLCA5MCUsIDYwJSk7Cn0KCi5ubXgtZmNwLW5hbWUtLW1lZGl1bSB7Cgljb2xvcjogaHNsKDU1LCA5MCUsIDYwJSk7Cn0KCi5ubXgtZmNwLW5hbWUtLWxvdyB7Cgljb2xvcjogaHNsKDIwNywgOTAlLCA2NSUpOwp9Cgoubm14LWZjcC1uYW1lLS1zYWZlIHsKCWNvbG9yOiBoc2woMTIwLCAyNSUsIDY1JSk7Cn0KCi5ubXgtZmNwLW5hbWUtLWRlZmF1bHQgewoJY29sb3I6ICNlNGU0ZTc7Cn0KCgoubm14LWZjcC1uYW1lLm5teC1mY3AtaGFzaC0tc2hhcmVkIHsKCWNvbG9yOiBoc2woMCwgOTAlLCA2OCUpOwoJdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmUgZG90dGVkOwoJY3Vyc29yOiBoZWxwOwp9Cgoubm14LWZjcC1uYW1lLm5teC1mY3AtaGFzaC0tdW5pcXVlIHsKCWNvbG9yOiBoc2woMTQwLCA1NSUsIDU4JSk7Cn0KCi5ubXgtZmNwLXNpemUgewoJbWFyZ2luLWxlZnQ6IGF1dG87CglwYWRkaW5nLWxlZnQ6IDEycHg7Cgljb2xvcjogI2ExYTFhYTsKCWZsZXg6IDAgMCBhdXRvOwp9CgoKLm5teC1mY3AtaGFzaC10b29sdGlwIHsKCXBvc2l0aW9uOiBmaXhlZDsKCXotaW5kZXg6IDEwMDAwOwoJZGlzcGxheTogbm9uZTsKCW1heC13aWR0aDogNTQwcHg7CgliYWNrZ3JvdW5kOiAjMjkyOTJlOwoJY29sb3I6ICNlNGU0ZTc7Cglib3JkZXI6IDFweCBzb2xpZCAjNTI1MjViOwoJYm9yZGVyLXJhZGl1czogNnB4OwoJcGFkZGluZzogOHB4IDEwcHg7Cglmb250LXNpemU6IDEzcHg7Cglmb250LWZhbWlseTogdWktc2Fucy1zZXJpZiwgc3lzdGVtLXVpLCBzYW5zLXNlcmlmLCAiQXBwbGUgQ29sb3IgRW1vamkiLCAiU2Vnb2UgVUkgRW1vamkiLCAiU2Vnb2UgVUkgU3ltYm9sIiwgIk5vdG8gQ29sb3IgRW1vamkiOwoJbGluZS1oZWlnaHQ6IDEuNTsKCWJveC1zaGFkb3c6IDAgNHB4IDE2cHggcmdiYSgwLCAwLCAwLCAwLjUpOwoJcG9pbnRlci1ldmVudHM6IG5vbmU7Cgl3aGl0ZS1zcGFjZTogbm9ybWFsOwoJd29yZC1icmVhazogYnJlYWstYWxsOwp9Cgoubm14LWZjcC1oYXNoLXRvb2x0aXAtdGl0bGUgewoJZm9udC13ZWlnaHQ6IDYwMDsKCW1hcmdpbi1ib3R0b206IDRweDsKCWNvbG9yOiAjZmFmYWZhOwp9Cgoubm14LWZjcC1oYXNoLXRvb2x0aXAgdWwgewoJbWFyZ2luOiAwOwoJcGFkZGluZy1sZWZ0OiAxNnB4Owp9Cgoubm14LWZjcC1jb250ZXh0LW1lbnUgewoJcG9zaXRpb246IGZpeGVkOwoJei1pbmRleDogMTAwMDA7CglkaXNwbGF5OiBub25lOwoJbWluLXdpZHRoOiAxNjBweDsKCWJhY2tncm91bmQ6ICMyOTI5MmU7Cglib3JkZXI6IDFweCBzb2xpZCAjNTI1MjViOwoJYm9yZGVyLXJhZGl1czogNnB4OwoJcGFkZGluZzogNHB4OwoJYm94LXNoYWRvdzogMCA0cHggMTZweCByZ2JhKDAsIDAsIDAsIDAuNSk7Cn0KCi5ubXgtZmNwLWNvbnRleHQtbWVudS1pdGVtIHsKCWRpc3BsYXk6IGZsZXg7CglhbGlnbi1pdGVtczogY2VudGVyOwoJZ2FwOiA4cHg7Cgl3aWR0aDogMTAwJTsKCXRleHQtYWxpZ246IGxlZnQ7CgliYWNrZ3JvdW5kOiBub25lOwoJYm9yZGVyOiBub25lOwoJY29sb3I6ICNlNGU0ZTc7Cglmb250LXNpemU6IDEzcHg7CglwYWRkaW5nOiA2cHggMTBweDsKCWJvcmRlci1yYWRpdXM6IDRweDsKCWN1cnNvcjogcG9pbnRlcjsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kOiAjM2UzZTQ3OwoJfQp9Cgoubm14LWZjcC1jb250ZXh0LW1lbnUtaWNvbiB7CglmbGV4OiAwIDAgYXV0bzsKCWZpbGw6IGN1cnJlbnRDb2xvcjsKfQoKLm5teC1mY3AtY29udGV4dC1tZW51LWRpdmlkZXIgewoJaGVpZ2h0OiAxcHg7CgltYXJnaW46IDRweCA2cHg7CgliYWNrZ3JvdW5kOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDgpOwp9Cg==",
+			"Cjpob3N0IHsKCWFsbDogaW5pdGlhbDsKfQoKKiB7Cglib3gtc2l6aW5nOiBib3JkZXItYm94Owp9Cgoubm14LWZjcC1iYWNrZHJvcCB7Cglwb3NpdGlvbjogZml4ZWQ7Cgl0b3A6IDA7CglsZWZ0OiAwOwoJd2lkdGg6IDEwMCU7CgloZWlnaHQ6IDEwMCU7CglkaXNwbGF5OiBmbGV4OwoJYWxpZ24taXRlbXM6IGNlbnRlcjsKCWp1c3RpZnktY29udGVudDogY2VudGVyOwoJYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjgpOwoJei1pbmRleDogOTk5OTsKfQoKLm5teC1mY3AtbW9kYWwgewoJZGlzcGxheTogZmxleDsKCWZsZXgtZGlyZWN0aW9uOiBjb2x1bW47Cgl3aWR0aDogOTAlOwoJbWF4LXdpZHRoOiA5MDBweDsKCWhlaWdodDogODUlOwoJYmFja2dyb3VuZDogIzFkMWQyMTsKCWNvbG9yOiAjZTRlNGU3OwoJYm9yZGVyOiAxcHggc29saWQgIzcxNzE3YTsKCWJvcmRlci1yYWRpdXM6IDhweDsKCW92ZXJmbG93OiBoaWRkZW47CgoJZm9udC1mYW1pbHk6IHVpLXNhbnMtc2VyaWYsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiwgIkFwcGxlIENvbG9yIEVtb2ppIiwgIlNlZ29lIFVJIEVtb2ppIiwgIlNlZ29lIFVJIFN5bWJvbCIsICJOb3RvIENvbG9yIEVtb2ppIjsKCWZvbnQtc2l6ZTogMTRweDsKCWxpbmUtaGVpZ2h0OiAxLjQ7Cn0KCi5ubXgtZmNwLWhlYWRlciB7Cglwb3NpdGlvbjogcmVsYXRpdmU7CglmbGV4OiAwIDAgYXV0bzsKCXBhZGRpbmc6IDEycHggNTZweCAxMnB4IDE2cHg7Cglib3JkZXItYm90dG9tOiAxcHggc29saWQgIzcxNzE3YTsKCWJhY2tncm91bmQ6ICMyOTI5MmU7CglsaW5lLWhlaWdodDogMS4xOwp9Cgoubm14LWZjcC10aXRsZS1yb3cgewoJZGlzcGxheTogZmxleDsKCWFsaWduLWl0ZW1zOiBjZW50ZXI7CglqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47CglnYXA6IDEycHg7CgltYXJnaW4tYm90dG9tOiA4cHg7Cn0KCi5ubXgtZmNwLXRpdGxlIHsKCW1hcmdpbjogMDsKCWZvbnQtc2l6ZTogMjBweDsKCWZvbnQtd2VpZ2h0OiA2MDA7Cn0KCi5ubXgtZmNwLWhhc2gtYWN0aW9ucyB7CglkaXNwbGF5OiBmbGV4OwoJYWxpZ24taXRlbXM6IGNlbnRlcjsKCWdhcDogNnB4OwoJZmxleDogMCAwIGF1dG87Cn0KCi5ubXgtZmNwLWhhc2gtYnRuIHsKCWJhY2tncm91bmQ6ICMzZTNlNDc7Cgljb2xvcjogI2U0ZTRlNzsKCWJvcmRlcjogMXB4IHNvbGlkICM3MTcxN2E7Cglib3JkZXItcmFkaXVzOiA0cHg7CglwYWRkaW5nOiA0cHggMTBweDsKCWZvbnQtc2l6ZTogMTJweDsKCWZvbnQtd2VpZ2h0OiA2MDA7Cgl0ZXh0LWRlY29yYXRpb246IG5vbmU7CgljdXJzb3I6IHBvaW50ZXI7Cgl3aGl0ZS1zcGFjZTogbm93cmFwOwoKCSY6aG92ZXI6bm90KDpkaXNhYmxlZCkgewoJCWJhY2tncm91bmQ6ICM1MjUyNWI7Cgl9CgoJJjpkaXNhYmxlZCB7CgkJY3Vyc29yOiBkZWZhdWx0OwoJCW9wYWNpdHk6IDAuNjsKCX0KfQoKLm5teC1mY3AtaGFzaC1idG4tLXJlbWVtYmVyZWQgewoJYm9yZGVyLWNvbG9yOiBoc2woMTIwLCA0MCUsIDQ1JSk7Cgljb2xvcjogaHNsKDEyMCwgNjAlLCA3MCUpOwp9Cgoubm14LWZjcC1oYXNoLWJ0bi0tZ290byB7CglwYWRkaW5nOiA0cHggOHB4OwoJY29sb3I6IGhzbCgyMDcsIDcwJSwgNzUlKTsKCWJvcmRlci1jb2xvcjogaHNsKDIwNywgNDAlLCA0NSUpOwoKCSY6aG92ZXIgewoJCWJhY2tncm91bmQ6IGhzbCgyMDcsIDQ1JSwgMjAlKTsKCX0KfQoKLm5teC1mY3AtaGFzaC1idG4tLWZvcmdldCB7CglwYWRkaW5nOiA0cHggOHB4OwoJY29sb3I6IGhzbCg0NSwgNTAlLCA3MCUpOwoJYm9yZGVyLWNvbG9yOiBoc2woNDUsIDM1JSwgNDAlKTsKCgkmOmhvdmVyOm5vdCg6ZGlzYWJsZWQpIHsKCQliYWNrZ3JvdW5kOiBoc2woNDUsIDQ1JSwgMjAlKTsKCX0KfQoKLm5teC1mY3AtY2xvc2UgewoJcG9zaXRpb246IGFic29sdXRlOwoJdG9wOiAwcHg7CglyaWdodDogOHB4OwoJYmFja2dyb3VuZDogbm9uZTsKCWJvcmRlcjogbm9uZTsKCWNvbG9yOiAjZTRlNGU3OwoJZm9udC1zaXplOiAzNHB4OwoJbGluZS1oZWlnaHQ6IDE7CgljdXJzb3I6IHBvaW50ZXI7CgoJJjpob3ZlciB7CgkJY29sb3I6ICNmYWZhZmE7Cgl9Cn0KCi5ubXgtZmNwLW1ldGEgewoJZGlzcGxheTogZmxleDsKCWZsZXgtd3JhcDogd3JhcDsKCWFsaWduLWl0ZW1zOiBjZW50ZXI7CglnYXA6IDhweDsKCW1hcmdpbi1ib3R0b206IDhweDsKfQoKLm5teC1mY3AtcmlzayB7CglwYWRkaW5nOiAycHggOHB4OwoJYm9yZGVyLXJhZGl1czogNHB4OwoJZm9udC13ZWlnaHQ6IDYwMDsKCWZvbnQtc2l6ZTogMTFweDsKCWxldHRlci1zcGFjaW5nOiAwLjA1ZW07Cn0KCi5ubXgtZmNwLXJpc2stLWhpZ2ggewoJYmFja2dyb3VuZC1jb2xvcjogaHNsKDAsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDAsIDkwJSwgNjAlKTsKfQoKLm5teC1mY3Atcmlzay0tbWVkaXVtIHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCg1NSwgMTAwJSwgMTAlKTsKCWNvbG9yOiBoc2woNTUsIDkwJSwgNjAlKTsKfQoKLm5teC1mY3Atcmlzay0tbG93IHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCgyMDcsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDIwNywgOTAlLCA2NSUpOwp9Cgoubm14LWZjcC1yaXNrLS1zYWZlIHsKCWJhY2tncm91bmQtY29sb3I6IGhzbCgxMjAsIDEwMCUsIDEwJSk7Cgljb2xvcjogaHNsKDEyMCwgNDAlLCA2NSUpOwp9Cgoubm14LWZjcC1yaXNrLS1kZWZhdWx0IHsKCWJhY2tncm91bmQtY29sb3I6ICMzZTNlNDc7Cgljb2xvcjogI2Q0ZDRkODsKfQoKLm5teC1mY3Atcmlzay0tc3Bvb2ZlZCB7CgliYWNrZ3JvdW5kLWNvbG9yOiBoc2woMCwgOTAlLCA0NSUpOwoJY29sb3I6ICNmZmY7CgljdXJzb3I6IHBvaW50ZXI7CgoJJjpob3ZlciB7CgkJYmFja2dyb3VuZC1jb2xvcjogaHNsKDAsIDkwJSwgNTIlKTsKCX0KfQoKCi5ubXgtZmNwLXJpc2stLWZvcm1hdHRpbmcgewoJYmFja2dyb3VuZC1jb2xvcjogaHNsKDMwLCA4MCUsIDQwJSk7Cgljb2xvcjogI2ZmZjsKCWN1cnNvcjogcG9pbnRlcjsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kLWNvbG9yOiBoc2woMzAsIDgwJSwgNDclKTsKCX0KfQoKLm5teC1mY3AtZXh0ZW5zaW9ucyB7CglkaXNwbGF5OiBmbGV4OwoJZmxleC13cmFwOiB3cmFwOwoJZ2FwOiA2cHg7Cn0KCi5ubXgtZmNwLWV4dCB7CglwYWRkaW5nOiAxcHggNnB4OwoJYm9yZGVyLXJhZGl1czogNHB4OwoJZm9udC1zaXplOiAxMXB4OwoJY3Vyc29yOiBwb2ludGVyOwoJYmFja2dyb3VuZDogIzNlM2U0NzsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kOiAjNTI1MjViOwoJfQp9Cgoubm14LWZjcC1leHQtLWhpZ2ggewoJY29sb3I6IGhzbCgwLCAxMDAlLCA3NiUpOwp9Cgoubm14LWZjcC1leHQtLW1lZGl1bSB7Cgljb2xvcjogaHNsKDU1LCA5MCUsIDYwJSk7Cn0KCi5ubXgtZmNwLWV4dC0tbG93IHsKCWNvbG9yOiBoc2woMjA3LCA5MCUsIDY1JSk7Cn0KCi5ubXgtZmNwLWV4dC0tc2FmZSB7Cgljb2xvcjogaHNsKDEyMCwgMjUlLCA2NSUpOwp9Cgoubm14LWZjcC1leHQtLWRlZmF1bHQgewoJY29sb3I6ICNkNGQ0ZDg7Cn0KCi5ubXgtZmNwLWZpbHRlciB7Cgl3aWR0aDogMTAwJTsKCWJhY2tncm91bmQtY29sb3I6ICMxZDFkMjE7Cgljb2xvcjogI2U0ZTRlNzsKCWJvcmRlcjogMXB4IHNvbGlkICNhMWExYWE7Cglib3JkZXItcmFkaXVzOiA0cHg7CglwYWRkaW5nOiA2cHggOHB4OwoJZm9udC1zaXplOiAxNHB4Owp9Cgoubm14LWZjcC10cmVlIHsKCWZsZXg6IDEgMSBhdXRvOwoJb3ZlcmZsb3cteTogYXV0bzsKCXBhZGRpbmc6IDhweCAwOwoJZm9udC1mYW1pbHk6IG1vbm9zcGFjZTsKCWZvbnQtc2l6ZTogMTNweDsKfQoKLm5teC1mY3Atcm93IHsKCWRpc3BsYXk6IGZsZXg7CglhbGlnbi1pdGVtczogY2VudGVyOwoJZ2FwOiA0cHg7CglwYWRkaW5nOiAycHggOHB4OwoJd2hpdGUtc3BhY2U6IG5vd3JhcDsKCgkmOmhvdmVyIHsKCQliYWNrZ3JvdW5kLWNvbG9yOiAjMjkyOTJlOwoJfQp9Cgoubm14LWZjcC1kaXIgewoJY3Vyc29yOiBwb2ludGVyOwoJdXNlci1zZWxlY3Q6IG5vbmU7Cn0KCi5ubXgtZmNwLWFycm93IHsKCWRpc3BsYXk6IGlubGluZS1ibG9jazsKCXdpZHRoOiAxZW07CgoJJjo6YmVmb3JlIHsKCQljb250ZW50OiAi4pa9IjsKCX0KfQoKLm5teC1mY3Atcm93Lm5teC1mY3AtY29sbGFwc2VkID4gLm5teC1mY3AtYXJyb3c6OmJlZm9yZSB7Cgljb250ZW50OiAi4pa3IjsKfQoKLm5teC1mY3AtbmFtZSB7CglvdmVyZmxvdzogaGlkZGVuOwoJdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7CgoJdW5pY29kZS1iaWRpOiBpc29sYXRlOwp9CgoKLm5teC1mY3AtYmlkaS1jaGFyIHsKCWRpc3BsYXk6IGlubGluZS1ibG9jazsKCW1hcmdpbjogMCAycHg7CglwYWRkaW5nOiAwIDNweDsKCWJvcmRlci1yYWRpdXM6IDNweDsKCWJhY2tncm91bmQtY29sb3I6IGhzbCgwLCA5MCUsIDQ1JSk7Cgljb2xvcjogI2ZmZjsKCWZvbnQtc2l6ZTogMTBweDsKCWZvbnQtd2VpZ2h0OiA3MDA7Cgl1bmljb2RlLWJpZGk6IGlzb2xhdGU7Cn0KCi5ubXgtZmNwLW5hbWUtLXNwb29mZWQgewoJdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmUgd2F2eSBoc2woMCwgOTAlLCA2MCUpOwoJdGV4dC11bmRlcmxpbmUtb2Zmc2V0OiAzcHg7Cn0KCgoubm14LWZjcC1uYW1lLS1mb3JtYXR0aW5nIHsKCXRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lIGRvdHRlZCBoc2woMzAsIDgwJSwgNTUlKTsKCXRleHQtdW5kZXJsaW5lLW9mZnNldDogM3B4Owp9Cgoubm14LWZjcC1uYW1lLS1oaWdoIHsKCWNvbG9yOiBoc2woMCwgOTAlLCA2MCUpOwp9Cgoubm14LWZjcC1uYW1lLS1tZWRpdW0gewoJY29sb3I6IGhzbCg1NSwgOTAlLCA2MCUpOwp9Cgoubm14LWZjcC1uYW1lLS1sb3cgewoJY29sb3I6IGhzbCgyMDcsIDkwJSwgNjUlKTsKfQoKLm5teC1mY3AtbmFtZS0tc2FmZSB7Cgljb2xvcjogaHNsKDEyMCwgMjUlLCA2NSUpOwp9Cgoubm14LWZjcC1uYW1lLS1kZWZhdWx0IHsKCWNvbG9yOiAjZTRlNGU3Owp9CgoKLm5teC1mY3AtbmFtZS5ubXgtZmNwLWhhc2gtLXNoYXJlZCB7Cgljb2xvcjogaHNsKDAsIDkwJSwgNjglKTsKCXRleHQtZGVjb3JhdGlvbjogdW5kZXJsaW5lIGRvdHRlZDsKCWN1cnNvcjogaGVscDsKfQoKLm5teC1mY3AtbmFtZS5ubXgtZmNwLWhhc2gtLXVuaXF1ZSB7Cgljb2xvcjogaHNsKDE0MCwgNTUlLCA1OCUpOwp9Cgoubm14LWZjcC1zaXplIHsKCW1hcmdpbi1sZWZ0OiBhdXRvOwoJcGFkZGluZy1sZWZ0OiAxMnB4OwoJY29sb3I6ICNhMWExYWE7CglmbGV4OiAwIDAgYXV0bzsKfQoKCi5ubXgtZmNwLWhhc2gtdG9vbHRpcCB7Cglwb3NpdGlvbjogZml4ZWQ7Cgl6LWluZGV4OiAxMDAwMDsKCWRpc3BsYXk6IG5vbmU7CgltYXgtd2lkdGg6IDU0MHB4OwoJYmFja2dyb3VuZDogIzI5MjkyZTsKCWNvbG9yOiAjZTRlNGU3OwoJYm9yZGVyOiAxcHggc29saWQgIzUyNTI1YjsKCWJvcmRlci1yYWRpdXM6IDZweDsKCXBhZGRpbmc6IDhweCAxMHB4OwoJZm9udC1zaXplOiAxM3B4OwoJZm9udC1mYW1pbHk6IHVpLXNhbnMtc2VyaWYsIHN5c3RlbS11aSwgc2Fucy1zZXJpZiwgIkFwcGxlIENvbG9yIEVtb2ppIiwgIlNlZ29lIFVJIEVtb2ppIiwgIlNlZ29lIFVJIFN5bWJvbCIsICJOb3RvIENvbG9yIEVtb2ppIjsKCWxpbmUtaGVpZ2h0OiAxLjU7Cglib3gtc2hhZG93OiAwIDRweCAxNnB4IHJnYmEoMCwgMCwgMCwgMC41KTsKCXBvaW50ZXItZXZlbnRzOiBub25lOwoJd2hpdGUtc3BhY2U6IG5vcm1hbDsKCXdvcmQtYnJlYWs6IGJyZWFrLWFsbDsKfQoKLm5teC1mY3AtaGFzaC10b29sdGlwLXRpdGxlIHsKCWZvbnQtd2VpZ2h0OiA2MDA7CgltYXJnaW4tYm90dG9tOiA0cHg7Cgljb2xvcjogI2ZhZmFmYTsKfQoKLm5teC1mY3AtaGFzaC10b29sdGlwIHVsIHsKCW1hcmdpbjogMDsKCXBhZGRpbmctbGVmdDogMTZweDsKfQoKLm5teC1mY3AtY29udGV4dC1tZW51IHsKCXBvc2l0aW9uOiBmaXhlZDsKCXotaW5kZXg6IDEwMDAwOwoJZGlzcGxheTogbm9uZTsKCW1pbi13aWR0aDogMTYwcHg7CgliYWNrZ3JvdW5kOiAjMjkyOTJlOwoJYm9yZGVyOiAxcHggc29saWQgIzUyNTI1YjsKCWJvcmRlci1yYWRpdXM6IDZweDsKCXBhZGRpbmc6IDRweDsKCWJveC1zaGFkb3c6IDAgNHB4IDE2cHggcmdiYSgwLCAwLCAwLCAwLjUpOwp9Cgoubm14LWZjcC1jb250ZXh0LW1lbnUtaXRlbSB7CglkaXNwbGF5OiBmbGV4OwoJYWxpZ24taXRlbXM6IGNlbnRlcjsKCWdhcDogOHB4OwoJd2lkdGg6IDEwMCU7Cgl0ZXh0LWFsaWduOiBsZWZ0OwoJYmFja2dyb3VuZDogbm9uZTsKCWJvcmRlcjogbm9uZTsKCWNvbG9yOiAjZTRlNGU3OwoJZm9udC1zaXplOiAxM3B4OwoJcGFkZGluZzogNnB4IDEwcHg7Cglib3JkZXItcmFkaXVzOiA0cHg7CgljdXJzb3I6IHBvaW50ZXI7CgoJJjpob3ZlciB7CgkJYmFja2dyb3VuZDogIzNlM2U0NzsKCX0KfQoKLm5teC1mY3AtY29udGV4dC1tZW51LWljb24gewoJZmxleDogMCAwIGF1dG87CglmaWxsOiBjdXJyZW50Q29sb3I7Cn0KCi5ubXgtZmNwLWNvbnRleHQtbWVudS1kaXZpZGVyIHsKCWhlaWdodDogMXB4OwoJbWFyZ2luOiA0cHggNnB4OwoJYmFja2dyb3VuZDogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA4KTsKfQo=",
 	};
 	const MIME_BY_EXT = {
 		".css": "text/css;charset=utf-8",
@@ -52,7 +52,136 @@
 	};
 })();
 
-const RISK_TIERS = {
+function nmxInjectPageScript(path, onLoad) {
+	const script = document.createElement("script");
+	script.src = browser.runtime.getURL(path);
+	script.addEventListener("load", () => {
+		script.remove();
+		onLoad?.();
+	});
+	script.addEventListener("error", () => script.remove());
+	(document.head || document.documentElement).prepend(script);
+}
+
+function nmxWatchPage(
+	callback,
+	{
+		debounceMs: debounceMs = 0,
+		pollMs: pollMs = 0,
+		attributes: attributes = false,
+		ignorePortalChurn: ignorePortalChurn = false,
+	} = {},
+) {
+	let debounceTimer;
+	const observer = new MutationObserver((mutationList) => {
+		if (ignorePortalChurn) {
+			const portalRoot = document.getElementById("headlessui-portal-root");
+			if (portalRoot && mutationList.every((mutation) => portalRoot.contains(mutation.target))) return;
+		}
+		if (debounceMs > 0) {
+			clearTimeout(debounceTimer);
+			debounceTimer = setTimeout(callback, debounceMs);
+		} else {
+			callback();
+		}
+	});
+	observer.observe(document.body, {
+		childList: true,
+		subtree: true,
+		attributes: attributes,
+	});
+	const intervalId = pollMs > 0 ? setInterval(callback, pollMs) : null;
+	return {
+		stop() {
+			observer.disconnect();
+			clearTimeout(debounceTimer);
+			if (intervalId !== null) clearInterval(intervalId);
+		},
+	};
+}
+
+function nmxSimulateClick(el) {
+	const rect = el.getBoundingClientRect();
+	const x = rect.left + rect.width / 2;
+	const y = rect.top + rect.height / 2;
+	const common = {
+		bubbles: true,
+		cancelable: true,
+		composed: true,
+		view: window,
+		clientX: x,
+		clientY: y,
+		button: 0,
+	};
+	const pointer = {
+		...common,
+		pointerId: 1,
+		pointerType: "mouse",
+		isPrimary: true,
+	};
+	el.dispatchEvent(new PointerEvent("pointerdown", pointer));
+	el.dispatchEvent(new MouseEvent("mousedown", common));
+	if (typeof el.focus === "function") el.focus();
+	el.dispatchEvent(new PointerEvent("pointerup", pointer));
+	el.dispatchEvent(new MouseEvent("mouseup", common));
+	el.dispatchEvent(new MouseEvent("click", common));
+}
+
+function nmxCreateSvgIcon(pathData, { svgClass: svgClass, svgStyle: svgStyle, pathStyle: pathStyle } = {}) {
+	const svgNs = "http://www.w3.org/2000/svg";
+	const svg = document.createElementNS(svgNs, "svg");
+	svg.setAttribute("viewBox", "0 0 24 24");
+	svg.setAttribute("role", "presentation");
+	if (svgClass) svg.setAttribute("class", svgClass);
+	if (svgStyle) svg.setAttribute("style", svgStyle);
+	const path = document.createElementNS(svgNs, "path");
+	path.setAttribute("d", pathData);
+	if (pathStyle) path.setAttribute("style", pathStyle);
+	svg.appendChild(path);
+	return svg;
+}
+
+function nmxCreateIconSpan(pathData) {
+	const span = document.createElement("span");
+	span.className = "flex items-center";
+	span.appendChild(
+		nmxCreateSvgIcon(pathData, {
+			svgClass: "shrink-0 size-4",
+			pathStyle: "fill:currentColor",
+		}),
+	);
+	return span;
+}
+
+function nmxHtmlDecode(input) {
+	const doc = new DOMParser().parseFromString(input, "text/html");
+	return doc.documentElement.textContent;
+}
+
+function nmxSetFieldValue(
+	element,
+	value,
+	{
+		events: events = [
+			"input",
+			"change",
+		],
+	} = {},
+) {
+	const prototype = element instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+	const nativeSetter = Object.getOwnPropertyDescriptor(prototype, "value")?.set;
+	if (nativeSetter) nativeSetter.call(element, value);
+	else element.value = value;
+	for (const type of events) {
+		element.dispatchEvent(
+			new Event(type, {
+				bubbles: true,
+			}),
+		);
+	}
+}
+
+var RISK_TIERS = {
 	high: [
 		"apk",
 		"bat",
@@ -139,15 +268,19 @@ const RISK_TIERS = {
 		"bsl",
 		"bundle",
 		"cda",
+		"cdmod",
 		"cfg",
 		"config",
 		"csproj",
 		"css",
 		"csv",
+		"cube",
 		"cur",
 		"db",
 		"db",
+		"dcx",
 		"dds",
+		"dlodsettings",
 		"drc",
 		"dss",
 		"dvf",
@@ -164,6 +297,7 @@ const RISK_TIERS = {
 		"flv",
 		"fuz",
 		"fx",
+		"fxh",
 		"fxp",
 		"fxs",
 		"fxt",
@@ -181,16 +315,18 @@ const RISK_TIERS = {
 		"jpg",
 		"json",
 		"jsonc",
+		"kf",
 		"lip",
 		"log",
+		"lst",
 		"m2ts",
 		"m2v",
 		"m4a",
 		"m4b",
 		"m4p",
 		"m4v",
+		"manifest",
 		"mcmeta",
-		"md",
 		"metacache",
 		"mkv",
 		"mmf",
@@ -224,7 +360,6 @@ const RISK_TIERS = {
 		"ovs",
 		"pabgb",
 		"pabgh",
-		"pak",
 		"pdb",
 		"pex",
 		"pjp",
@@ -244,6 +379,7 @@ const RISK_TIERS = {
 		"sav",
 		"seq",
 		"setting",
+		"settings",
 		"sln",
 		"srt",
 		"store",
@@ -260,9 +396,6 @@ const RISK_TIERS = {
 		"tsv",
 		"tta",
 		"ttf",
-		"ucas",
-		"usmap",
-		"utoc",
 		"viv",
 		"vob",
 		"voc",
@@ -292,29 +425,241 @@ const RISK_TIERS = {
 	],
 };
 
-const FILE_METADATA_BASE = "https://file-metadata.nexusmods.com/file/nexus-files-s3-meta";
+var FILE_METADATA_BASE = "https://file-metadata.nexusmods.com/file/nexus-files-s3-meta";
 
-const RISK_TIER_SETS = Object.fromEntries(
+var RISK_TIER_SETS = Object.fromEntries(
 	Object.entries(RISK_TIERS).map(([tier, exts]) => [
 		tier,
 		new Set(exts),
 	]),
 );
 
-let currentModalTree;
+var FILENAME_SPOOFING_CODE_POINTS = [
+	8203,
+	8204,
+	8205,
+	8206,
+	8207,
+	8234,
+	8235,
+	8236,
+	8237,
+	8238,
+	8294,
+	8295,
+	8296,
+	8297,
+	65279,
+];
 
-let modalKeyHandler;
+var UNICODE_BIDI_OVERRIDE_CHARS = new Set(
+	[
+		8237,
+		8238,
+	].map((cp) => String.fromCodePoint(cp)),
+);
 
-let modalCssTextPromise;
+var UNICODE_BIDI_EMBEDDING_CHARS = new Set(
+	[
+		8234,
+		8235,
+	].map((cp) => String.fromCodePoint(cp)),
+);
 
-let filterDebounceTimer;
+var UNICODE_BIDI_EMBEDDING_OR_OVERRIDE_CLOSE = String.fromCodePoint(8236);
 
-const FILTER_DEBOUNCE_MS = 150;
+var UNICODE_BIDI_ISOLATE_CHARS = new Set(
+	[
+		8294,
+		8295,
+		8296,
+	].map((cp) => String.fromCodePoint(cp)),
+);
 
-const REMEMBERED_STORAGE_KEY = "nmxRememberedFileHashes";
+var UNICODE_BIDI_ISOLATE_CLOSE = String.fromCodePoint(8297);
 
-function loadRememberedFileSet() {
+var UNICODE_ZERO_WIDTH_NON_JOINER = String.fromCodePoint(8204);
+
+var UNICODE_ZERO_WIDTH_JOINER = String.fromCodePoint(8205);
+
+var ARABIC_SCRIPT_CODE_POINT_RANGES = [
+	[
+		1536,
+		1791,
+	],
+	[
+		1872,
+		1919,
+	],
+	[
+		2208,
+		2303,
+	],
+	[
+		64336,
+		65023,
+	],
+	[
+		65136,
+		65279,
+	],
+];
+
+var EMOJI_VARIATION_SELECTOR_CODE_POINTS = new Set([
+	65038,
+	65039,
+]);
+
+var EMOJI_CATEGORY_RE = /\p{So}|\p{Sk}/u;
+
+var FILENAME_SPOOFING_CHAR_CLASS = `[${FILENAME_SPOOFING_CODE_POINTS.map(codePointEscape).join("")}]`;
+
+var FILENAME_SPOOFING_RE = new RegExp(FILENAME_SPOOFING_CHAR_CLASS);
+
+var FILENAME_SPOOFING_SPLIT_RE = new RegExp(`(${FILENAME_SPOOFING_CHAR_CLASS})`);
+
+var FILENAME_SPOOFING_FILTER = `/${FILENAME_SPOOFING_CHAR_CLASS}/`;
+
+function codePointEscape(codePoint) {
+	return `\\u${codePoint.toString(16).padStart(4, "0")}`;
+}
+
+function isArabicScriptChar(char) {
+	if (!char) return false;
+	const codePoint = char.codePointAt(0);
+	return ARABIC_SCRIPT_CODE_POINT_RANGES.some(([start, end]) => codePoint >= start && codePoint <= end);
+}
+
+function isEmojiLikeChar(char) {
+	if (!char) return false;
+	if (EMOJI_VARIATION_SELECTOR_CODE_POINTS.has(char.codePointAt(0))) return true;
+	return EMOJI_CATEGORY_RE.test(char);
+}
+
+function isExemptSpoofingChar(codePoints, index, char) {
+	const before = index > 0 ? codePoints[index - 1] : "";
+	const after = index + 1 < codePoints.length ? codePoints[index + 1] : "";
+	if (char === UNICODE_ZERO_WIDTH_NON_JOINER) return isArabicScriptChar(before) || isArabicScriptChar(after);
+	if (char === UNICODE_ZERO_WIDTH_JOINER) return isEmojiLikeChar(before) || isEmojiLikeChar(after);
+	return false;
+}
+
+function toCodePoints(str) {
+	return Array.from(str);
+}
+
+function flaggedSpoofingIndexes(str) {
+	const codePoints = toCodePoints(str);
+	const flagged = new Set();
+	codePoints.forEach((char, index) => {
+		if (FILENAME_SPOOFING_RE.test(char) && !isExemptSpoofingChar(codePoints, index, char)) flagged.add(index);
+	});
+	return {
+		codePoints: codePoints,
+		flagged: flagged,
+	};
+}
+
+function hasFilenameSpoofingChars(name) {
+	return flaggedSpoofingIndexes(name).flagged.size > 0;
+}
+
+function stripFilenameSpoofingChars(name) {
+	return name
+		.split(FILENAME_SPOOFING_SPLIT_RE)
+		.filter((part) => !FILENAME_SPOOFING_RE.test(part))
+		.join("");
+}
+
+function renderFilenameInto(el, name) {
+	const { codePoints: codePoints, flagged: flagged } = flaggedSpoofingIndexes(name);
+	let buffer = "";
+	const flushBuffer = () => {
+		if (buffer) el.appendChild(document.createTextNode(buffer));
+		buffer = "";
+	};
+	codePoints.forEach((char, index) => {
+		if (!flagged.has(index)) {
+			buffer += char;
+			return;
+		}
+		flushBuffer();
+		const marker = document.createElement("span");
+		marker.className = "nmx-fcp-bidi-char";
+		marker.textContent = `<U+${char.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")}>`;
+		el.appendChild(marker);
+	});
+	flushBuffer();
+}
+
+function escapeFilenameSpoofingChars(name) {
+	const { codePoints: codePoints, flagged: flagged } = flaggedSpoofingIndexes(name);
+	return codePoints
+		.map((char, index) => (flagged.has(index) ? `<U+${char.codePointAt(0).toString(16).toUpperCase().padStart(4, "0")}>` : char))
+		.join("");
+}
+
+function overrideSpansExtension(path) {
+	const codePoints = toCodePoints(path);
+	let lastSlash = -1;
+	for (let i = 0; i < codePoints.length; i++) if (codePoints[i] === "/") lastSlash = i;
+	let extensionStart = -1;
+	for (let i = lastSlash + 1; i < codePoints.length; i++) if (codePoints[i] === ".") extensionStart = i;
+	if (extensionStart === -1) return false;
+	const prefix = codePoints.slice(0, extensionStart);
+	if (prefix.some((char) => UNICODE_BIDI_ISOLATE_CHARS.has(char) || char === UNICODE_BIDI_ISOLATE_CLOSE)) return false;
+	const stack = [];
+	for (const char of prefix) {
+		if (UNICODE_BIDI_OVERRIDE_CHARS.has(char) || UNICODE_BIDI_EMBEDDING_CHARS.has(char)) stack.push(char);
+		else if (char === UNICODE_BIDI_EMBEDDING_OR_OVERRIDE_CLOSE && stack.length) stack.pop();
+	}
+	return stack.some((char) => UNICODE_BIDI_OVERRIDE_CHARS.has(char));
+}
+
+function classifyUnicodeFilenameSpoofing(path) {
+	if (!hasFilenameSpoofingChars(path)) return null;
+	return overrideSpansExtension(path) ? "extension-disguise" : "suspicious-formatting";
+}
+
+function collectSpoofedNodes(nodes, disguised = [], formatting = [], ancestorFlagged = false) {
+	for (const node of nodes) {
+		const tier = classifyUnicodeFilenameSpoofing(node.fullPath);
+		if (tier === "extension-disguise") disguised.push(node);
+		else if (tier === "suspicious-formatting" && !ancestorFlagged) formatting.push(node);
+		if (node.type === "dir") {
+			collectSpoofedNodes(node.children, disguised, formatting, ancestorFlagged || hasFilenameSpoofingChars(node.name));
+		}
+	}
+	return [
+		disguised,
+		formatting,
+	];
+}
+
+var currentModalTree;
+
+var modalKeyHandler;
+
+var modalCssTextPromise;
+
+var filterDebounceTimer;
+
+var bodyOverflowBeforeModal;
+
+var FILTER_DEBOUNCE_MS = 150;
+
+var REMEMBERED_STORAGE_KEY = "nmxRememberedFileHashes";
+
+function hasSessionStorage() {
+	return Boolean(browser.storage?.session);
+}
+
+async function loadRememberedFileSet() {
 	try {
+		if (hasSessionStorage()) {
+			const result = await browser.storage.session.get(REMEMBERED_STORAGE_KEY);
+			return result[REMEMBERED_STORAGE_KEY];
+		}
 		const raw = localStorage.getItem(REMEMBERED_STORAGE_KEY);
 		return raw ? JSON.parse(raw) : undefined;
 	} catch {
@@ -326,22 +671,34 @@ function getModPageUrl() {
 	return document.querySelector('meta[property="og:url"]')?.content || location.href;
 }
 
-function saveRememberedFileSet(sourceUrl, hashToPaths) {
-	localStorage.setItem(
-		REMEMBERED_STORAGE_KEY,
-		JSON.stringify({
-			sourceUrl: sourceUrl,
-			hashToPaths: hashToPaths,
-			modPageUrl: getModPageUrl(),
-		}),
-	);
+async function saveRememberedFileSet(sourceUrl, hashToPaths) {
+	const value = {
+		sourceUrl: sourceUrl,
+		hashToPaths: hashToPaths,
+		modPageUrl: getModPageUrl(),
+	};
+	if (hasSessionStorage()) {
+		await browser.storage.session.set({
+			[REMEMBERED_STORAGE_KEY]: value,
+		});
+		return;
+	}
+	localStorage.setItem(REMEMBERED_STORAGE_KEY, JSON.stringify(value));
 }
 
-const HASH_TOOLTIP_SHOW_DELAY_MS = 300;
+async function clearRememberedFileSet() {
+	if (hasSessionStorage()) {
+		await browser.storage.session.remove(REMEMBERED_STORAGE_KEY);
+		return;
+	}
+	localStorage.removeItem(REMEMBERED_STORAGE_KEY);
+}
 
-let hashTooltipShowTimer;
+var HASH_TOOLTIP_SHOW_DELAY_MS = 300;
 
-let hashTooltipEl;
+var hashTooltipShowTimer;
+
+var hashTooltipEl;
 
 function loadModalCssText() {
 	if (!modalCssTextPromise) {
@@ -356,6 +713,8 @@ async function nmxOpenContentPreviewModal(url) {
 	nmxCloseContentPreviewModal();
 	const host = await buildModalShell();
 	document.documentElement.appendChild(host);
+	bodyOverflowBeforeModal = document.body.style.overflow;
+	document.body.style.overflow = "hidden";
 	const shadowRoot = host.shadowRoot;
 	const treeContainer = shadowRoot.querySelector(".nmx-fcp-tree");
 	treeContainer.textContent = "Loading…";
@@ -376,6 +735,10 @@ async function nmxOpenContentPreviewModal(url) {
 
 function nmxCloseContentPreviewModal() {
 	document.querySelector(".nmx-fcp-overlay")?.remove();
+	if (bodyOverflowBeforeModal !== undefined) {
+		document.body.style.overflow = bodyOverflowBeforeModal;
+		bodyOverflowBeforeModal = undefined;
+	}
 	if (modalKeyHandler) {
 		document.removeEventListener("keydown", modalKeyHandler);
 		modalKeyHandler = undefined;
@@ -487,6 +850,31 @@ function renderModalContents(shadowRoot, tree, url) {
 	riskBadge.textContent =
 		overallRisk === "safe" ? "SAFE" : overallRisk === "default" ? "UNKNOWN" : `${overallRisk.toUpperCase()} RISK`;
 	meta.appendChild(riskBadge);
+	const [disguisedNodes, formattingNodes] = collectSpoofedNodes(tree);
+	if (disguisedNodes.length) {
+		const spoofBadge = document.createElement("span");
+		spoofBadge.className = "nmx-fcp-risk nmx-fcp-risk--spoofed";
+		spoofBadge.textContent = `⚠ ${disguisedNodes.length} DISGUISED NAME${disguisedNodes.length === 1 ? "" : "S"}`;
+		spoofBadge.title = disguisedNodes.map((node) => escapeFilenameSpoofingChars(node.name)).join("\n");
+		spoofBadge.addEventListener("click", () => {
+			filterInput.value = filterInput.value === FILENAME_SPOOFING_FILTER ? "" : FILENAME_SPOOFING_FILTER;
+			clearTimeout(filterDebounceTimer);
+			applyFilter(filterInput.value);
+		});
+		meta.appendChild(spoofBadge);
+	}
+	if (formattingNodes.length) {
+		const formattingBadge = document.createElement("span");
+		formattingBadge.className = "nmx-fcp-risk nmx-fcp-risk--formatting";
+		formattingBadge.textContent = `${formattingNodes.length} UNUSUAL NAME${formattingNodes.length === 1 ? "" : "S"}`;
+		formattingBadge.title = formattingNodes.map((node) => escapeFilenameSpoofingChars(node.name)).join("\n");
+		formattingBadge.addEventListener("click", () => {
+			filterInput.value = filterInput.value === FILENAME_SPOOFING_FILTER ? "" : FILENAME_SPOOFING_FILTER;
+			clearTimeout(filterDebounceTimer);
+			applyFilter(filterInput.value);
+		});
+		meta.appendChild(formattingBadge);
+	}
 	const extList = document.createElement("div");
 	extList.className = "nmx-fcp-extensions";
 	for (const ext of [
@@ -538,7 +926,7 @@ function collectFileHashes(nodes) {
 	return result;
 }
 
-function wireHashComparison(shadowRoot, tree, url) {
+async function wireHashComparison(shadowRoot, tree, url) {
 	const rememberBtn = shadowRoot.querySelector(".nmx-fcp-remember-btn");
 	const compareBtn = shadowRoot.querySelector(".nmx-fcp-compare-btn");
 	const goToModBtn = shadowRoot.querySelector(".nmx-fcp-goto-btn");
@@ -546,8 +934,8 @@ function wireHashComparison(shadowRoot, tree, url) {
 	const treeContainer = shadowRoot.querySelector(".nmx-fcp-tree");
 	const hashEntries = collectFileHashes(tree);
 	const hasHashes = hashEntries.length > 0;
-	function refreshButtons() {
-		const remembered = loadRememberedFileSet();
+	async function refreshButtons() {
+		const remembered = await loadRememberedFileSet();
 		forgetBtn.hidden = !remembered;
 		goToModBtn.hidden = !remembered;
 		if (remembered) goToModBtn.href = remembered.modPageUrl;
@@ -564,36 +952,36 @@ function wireHashComparison(shadowRoot, tree, url) {
 		rememberBtn.classList.toggle("nmx-fcp-hash-btn--remembered", isRemembered);
 		compareBtn.hidden = !remembered || remembered.sourceUrl === url;
 	}
-	refreshButtons();
-	forgetBtn.addEventListener("click", () => {
-		localStorage.removeItem(REMEMBERED_STORAGE_KEY);
+	await refreshButtons();
+	forgetBtn.addEventListener("click", async () => {
+		await clearRememberedFileSet();
 		clearHashComparison(hashEntries);
 		compareBtn.disabled = false;
 		compareBtn.textContent = "Compare";
-		refreshButtons();
+		await refreshButtons();
 	});
 	if (!hasHashes) return;
-	rememberBtn.addEventListener("click", () => {
+	rememberBtn.addEventListener("click", async () => {
 		const hashToPaths = {};
 		for (const { path: path, sha256: sha256 } of hashEntries) {
 			if (!hashToPaths[sha256]) hashToPaths[sha256] = [];
 			hashToPaths[sha256].push(path);
 		}
-		saveRememberedFileSet(url, hashToPaths);
+		await saveRememberedFileSet(url, hashToPaths);
 		clearHashComparison(hashEntries);
 		compareBtn.disabled = false;
 		compareBtn.textContent = "Compare";
-		refreshButtons();
+		await refreshButtons();
 	});
-	compareBtn.addEventListener("click", () => {
-		applyHashComparison(shadowRoot, treeContainer, hashEntries);
+	compareBtn.addEventListener("click", async () => {
+		await applyHashComparison(shadowRoot, treeContainer, hashEntries);
 		compareBtn.disabled = true;
 		compareBtn.textContent = "Compared ✓";
 	});
 }
 
-function applyHashComparison(shadowRoot, treeContainer, hashEntries) {
-	const remembered = loadRememberedFileSet();
+async function applyHashComparison(shadowRoot, treeContainer, hashEntries) {
+	const remembered = await loadRememberedFileSet();
 	if (!remembered) return;
 	for (const { sha256: sha256, node: node } of hashEntries) {
 		const nameEl = node.rowEl?.querySelector(".nmx-fcp-name");
@@ -642,7 +1030,7 @@ function showHashTooltip(shadowRoot, anchor, paths) {
 	const list = document.createElement("ul");
 	for (const path of paths) {
 		const item = document.createElement("li");
-		item.textContent = path;
+		item.textContent = escapeFilenameSpoofingChars(path);
 		list.appendChild(item);
 	}
 	hashTooltipEl.appendChild(list);
@@ -668,7 +1056,7 @@ function hideHashTooltip() {
 	if (hashTooltipEl) hashTooltipEl.style.display = "none";
 }
 
-let fileContextMenuEl;
+var fileContextMenuEl;
 
 function wireFileContextMenu(shadowRoot, treeContainer) {
 	treeContainer.addEventListener("contextmenu", (e) => {
@@ -714,9 +1102,9 @@ function buildContextMenuDivider() {
 	return divider;
 }
 
-const SVG_NS = "http://www.w3.org/2000/svg";
+var SVG_NS = "http://www.w3.org/2000/svg";
 
-const COPY_ICON_PATH =
+var COPY_ICON_PATH =
 	"M16 1H4C2.9 1 2 1.9 2 3V17H4V3H16V1ZM19 5H8C6.9 5 6 5.9 6 7V21C6 22.1 6.9 23 8 23H19C20.1 23 21 22.1 21 21V7C21 5.9 20.1 5 19 5ZM19 21H8V7H19V21Z";
 
 function buildContextMenuItem(label, onClick) {
@@ -781,7 +1169,18 @@ function renderNode(node, container, depth) {
 	row.appendChild(icon);
 	const name = document.createElement("span");
 	name.className = "nmx-fcp-name";
-	name.textContent = node.hashVerifiedSafe ? `✅ ${node.name}` : node.name;
+	if (node.hashVerifiedSafe) name.appendChild(document.createTextNode("✅ "));
+	renderFilenameInto(name, node.name);
+	const spoofingTier = classifyUnicodeFilenameSpoofing(node.fullPath);
+	if (spoofingTier === "extension-disguise") {
+		name.classList.add("nmx-fcp-name--spoofed");
+		name.title = hasFilenameSpoofingChars(node.name)
+			? `This name hides Unicode characters that change how it is drawn on screen. Real name: ${escapeFilenameSpoofingChars(node.name)}`
+			: "A parent folder in this path leaves a Unicode direction override open, which can disguise this entry's real extension outside this modal (e.g. after extracting the archive).";
+	} else if (spoofingTier === "suspicious-formatting") {
+		name.classList.add("nmx-fcp-name--formatting");
+		name.title = `This name contains unusual Unicode formatting/invisible characters, but doesn't appear to disguise its extension. Real name: ${escapeFilenameSpoofingChars(node.name)}`;
+	}
 	if (node.type === "file") {
 		const tier = riskTierOfNode(node);
 		name.classList.add(`nmx-fcp-name--${tier}`);
@@ -876,7 +1275,7 @@ function buildTreeFromManifest(entries) {
 	return root;
 }
 
-const manifestDirIndexes = new WeakMap();
+var manifestDirIndexes = new WeakMap();
 
 function insertManifestPath(children, parts, fileSize, sha256) {
 	const [head, ...rest] = parts;
@@ -935,9 +1334,10 @@ function sortTree(nodes) {
 }
 
 function getExtension(name) {
-	const idx = name.lastIndexOf(".");
+	const clean = stripFilenameSpoofingChars(name);
+	const idx = clean.lastIndexOf(".");
 	if (idx <= 0) return null;
-	return name.slice(idx + 1).toLowerCase();
+	return clean.slice(idx + 1).toLowerCase();
 }
 
 function collectExtensions(nodes, set = new Set()) {
@@ -959,6 +1359,7 @@ function riskTierOf(ext) {
 }
 
 function riskTierOfNode(node) {
+	if (classifyUnicodeFilenameSpoofing(node.fullPath) === "extension-disguise") return "high";
 	if (node.hashVerifiedSafe) return "safe";
 	return riskTierOf(getExtension(node.name));
 }
@@ -996,24 +1397,9 @@ function computeOverallRisk(tree) {
 	const tweaksClass = "file-tweaks";
 	const copyIdBtnClass = "nmx-copy-file-id-btn";
 	let tabObserver;
-	const SVG_NS = "http://www.w3.org/2000/svg";
 	const pathCopy =
 		"M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z";
 	const pathCopied = "M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z";
-	function createIconSpan(pathData) {
-		const span = document.createElement("span");
-		span.className = "flex items-center";
-		const svg = document.createElementNS(SVG_NS, "svg");
-		svg.setAttribute("viewBox", "0 0 24 24");
-		svg.setAttribute("role", "presentation");
-		svg.setAttribute("class", "shrink-0 size-4");
-		const path = document.createElementNS(SVG_NS, "path");
-		path.setAttribute("d", pathData);
-		path.setAttribute("style", "fill:currentColor");
-		svg.appendChild(path);
-		span.appendChild(svg);
-		return span;
-	}
 	nmxRegisterToggle("optToggleFilesTabTweaks", {
 		cssFiles: [
 			"src/features/files-tab-tweaks/files-tab-tweaks.css",
@@ -1100,7 +1486,7 @@ function computeOverallRisk(tree) {
 			btn.className = copyIdBtnClass;
 			btn.title = `Copy file ID (${fileId})`;
 			btn.dataset.fileId = fileId;
-			btn.replaceChildren(createIconSpan(pathCopy));
+			btn.replaceChildren(nmxCreateIconSpan(pathCopy));
 			btn.addEventListener("click", copyFileId);
 			span.append(idText, btn);
 			actions.append(span);
@@ -1113,9 +1499,9 @@ function computeOverallRisk(tree) {
 			.writeText(fileId)
 			.then(() => {
 				this.classList.add("disabled");
-				this.replaceChildren(createIconSpan(pathCopied));
+				this.replaceChildren(nmxCreateIconSpan(pathCopied));
 				setTimeout(() => {
-					this.replaceChildren(createIconSpan(pathCopy));
+					this.replaceChildren(nmxCreateIconSpan(pathCopy));
 					this.classList.remove("disabled");
 				}, 1500);
 			})
