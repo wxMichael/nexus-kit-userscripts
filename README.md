@@ -30,8 +30,11 @@ Here you can pick just what you want instead of installing the whole extension.
 | Media Edit TOS                    | [Install][mdt-raw] |  |
 | Mod Edit: Files                   | [Install][mef-raw] |  |
 | Mod Edit: Media                   | [Install][mem-raw] |  |
+| Mod Edit: Permissions             | [Install][mep-raw] | Adds a license picker on a mod's Permissions edit tab. |
+| My Reports Tweaks                 | [Install][mrt-raw] | Shows your attachments and reported comment content on the My Reports page. |
 | New Tag Styles                    | [Install][nts-raw] |  |
 | Page Title Tweaks                 | [Install][ptt-raw] |  |
+| Profile Bling                     | [Install][pbl-raw] | Recolors the Mod Author badge by unique downloads. |
 | Unread Notification Titles        | [Install][unt-raw] |  |
 
 | Usersyle                          |      Install       | Description  |
@@ -46,8 +49,11 @@ Here you can pick just what you want instead of installing the whole extension.
 [mdt-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/media-edit-tos.user.js
 [mef-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/mod-edit-files.user.js
 [mem-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/mod-edit-media.user.js
+[mep-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/mod-edit-permissions.user.js
+[mrt-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/my-reports-tweaks.user.js
 [nts-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/new-tag-styles.user.js
 [ptt-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/page-title-tweaks.user.js
+[pbl-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/profile-bling.user.js
 [unt-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/unread-notification-titles.user.js
 
 [dtf-raw]: https://raw.githubusercontent.com/wxMichael/nexus-kit-userscripts/main/dark-theme-fixes.user.css
